@@ -18,9 +18,9 @@ class Artist
 
   def self.create()
     sql = "CREATE TABLE artists (
-      id SERIAL4 PRIMARY KEY,
-      name VARCHAR(255)
-      );"
+    id SERIAL4 PRIMARY KEY,
+    name VARCHAR(255)
+    );"
     SqlRunner.run(sql)
   end
 
@@ -33,9 +33,15 @@ class Artist
         $1
       )
       RETURNING id"
-    values = [@name]
-    result = SqlRunner.run(sql, values)
-    @id = result[0]['id']
-  end
+      values = [@name]
+      result = SqlRunner.run(sql, values)
+      @id = result[0]['id']
+    end
 
-end
+    def self.all()
+      sql = "SELECT * FROM artists;"
+      artists = SqlRunner.run( sql )
+      return artists.map { |artist| Artist.new( artist ) }
+    end
+
+  end

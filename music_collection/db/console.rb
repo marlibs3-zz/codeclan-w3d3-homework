@@ -30,3 +30,6 @@ album3.save()
 album4.save()
 album5.save()
 album6.save()
+
+p Artist.all()
+p Album.all()
