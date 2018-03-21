@@ -1,0 +1,32 @@
+require('pg')
+require_relative('../models/artist')
+require_relative('../models/album')
+
+Album.drop()
+Artist.drop()
+Artist.create()
+Album.create()
+
+artist1 = Artist.new({ 'name' => 'The Mountain Goats' })
+artist2 = Artist.new({ 'name' => 'Fall Out Boy' })
+artist3 = Artist.new({ 'name' => 'Panic! at the Disco' })
+artist4 = Artist.new({ 'name' => 'dodie' })
+
+artist1.save()
+artist2.save()
+artist3.save()
+artist4.save()
+
+album1 = Album.new({ 'name' => 'All Hail West Texas', 'artist_id' => artist1.id })
+album2 = Album.new({ 'name' => 'Transcendental Youth', 'artist_id' => artist1.id })
+album3 = Album.new({ 'name' => 'M A N  I  A', 'artist_id' => artist2.id })
+album4 = Album.new({ 'name' => 'Folie a Deux', 'artist_id' => artist2.id })
+album5 = Album.new({ 'name' => 'Death of a Bachelor', 'artist_id' => artist3.id })
+album6 = Album.new({ 'name' => 'You', 'artist_id' => artist4.id })
+
+album1.save()
+album2.save()
+album3.save()
+album4.save()
+album5.save()
+album6.save()
