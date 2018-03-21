@@ -44,4 +44,22 @@ class Artist
       return artists.map { |artist| Artist.new( artist ) }
     end
 
+    def pizza_orders()
+      sql = "SELECT * FROM pizza_orders
+      WHERE customer_id = $1"
+      values = [@id]
+      results = SqlRunner.run( sql, values )
+      orders = results.map { |order| PizzaOrder.new( order ) }
+      return orders
+    end
+
+    def pizza_orders()
+      sql = "SELECT * FROM pizza_orders
+      WHERE customer_id = $1"
+      values = [@id]
+      results = SqlRunner.run( sql, values )
+      orders = results.map { |order| PizzaOrder.new( order ) }
+      return orders
+    end
+
   end

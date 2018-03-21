@@ -20,9 +20,9 @@ class Album
 
   def self.create()
     sql = "CREATE TABLE albums (
-      id SERIAL4 PRIMARY KEY,
-      name VARCHAR(255),
-      artist_id  INT4 REFERENCES artists(id)
+    id SERIAL4 PRIMARY KEY,
+    name VARCHAR(255),
+    artist_id  INT4 REFERENCES artists(id)
     );"
     SqlRunner.run(sql)
   end
@@ -37,15 +37,35 @@ class Album
         $1, $2
       )
       RETURNING id"
-    values = [@name, @artist_id]
-    result = SqlRunner.run(sql, values)
-    @id = result[0]['id']
-  end
+      values = [@name, @artist_id]
+      result = SqlRunner.run(sql, values)
+      @id = result[0]['id']
+    end
 
-  def self.all()
-    sql = "SELECT * FROM artists;"
-    albums = SqlRunner.run( sql )
-    return albums.map { |album| Album.new( album ) }
-  end
+    def self.all()
+      sql = "SELECT * FROM artists;"
+      albums = SqlRunner.run( sql )
+      return albums.map { |album| Album.new( album ) }
+    end
 
-end
+    def artist()
+      sql = "SELECT * FROM artists
+      WHERE id = $1"
+      values = [@customer_id]
+      results = SqlRunner.run( sql, values )
+      customer_data = results[0]
+      customer = Customer.new( customer_data )
+      return customer
+    end
+
+    def customer()
+      sql = "SELECT * FROM customers
+      WHERE id = $1"
+      values = [@customer_id]
+      results = SqlRunner.run( sql, values )
+      customer_data = results[0]
+      customer = Customer.new( customer_data )
+      return customer
+    end
+
+  end
